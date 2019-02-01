@@ -29,6 +29,10 @@ window.lgData = {
 
 window.lgModules = {};
 var defaults = {
+    // custom default options:
+    planName: '',
+
+    // end custom default options
 
     mode: 'lg-slide',
 
@@ -43,7 +47,6 @@ var defaults = {
     addClass: '',
     startClass: 'lg-start-zoom',
     backdropDuration: 150,
-    hideBarsDelay: 6000,
 
     useLeft: false,
 
@@ -87,6 +90,7 @@ var defaults = {
     download: true,
     counter: true,
     appendCounterTo: '.lg-toolbar',
+    appendPlanNameTo: '.lg-toolbar',
 
     swipeThreshold: 50,
     enableSwipe: true,
@@ -117,9 +121,6 @@ function Plugin(element, options) {
     this.lGalleryOn = false;
 
     this.lgBusy = false;
-
-    // Timeout function for hiding controls;
-    this.hideBartimeout = false;
 
     // To determine browser supports for touch events;
     this.isTouch = ('ontouchstart' in document.documentElement);
@@ -259,25 +260,11 @@ Plugin.prototype.build = function(index) {
     }
 
     _this.counter();
+    _this.planName();
 
     _this.closeGallery();
 
     utils.trigger(_this.el, 'onAfterOpen');
-
-    // Hide controllers if mouse doesn't move for some period
-    utils.on(_this.outer, 'mousemove.lg click.lg touchstart.lg', function() {
-
-        utils.removeClass(_this.outer, 'lg-hide-items');
-
-        clearTimeout(_this.hideBartimeout);
-
-        // Timeout will be cleared on each slide movement also
-        _this.hideBartimeout = setTimeout(function() {
-            utils.addClass(_this.outer, 'lg-hide-items');
-        }, _this.s.hideBarsDelay);
-
-    });
-
 };
 
 Plugin.prototype.structure = function() {
@@ -812,8 +799,6 @@ Plugin.prototype.slide = function(index, fromTouch, fromThumb) {
         });
 
         _this.lgBusy = true;
-
-        clearTimeout(_this.hideBartimeout);
 
         // Add title if this.s.appendSubHtmlTo === lg-sub-html
         if (this.s.appendSubHtmlTo === '.lg-sub-html') {
@@ -1368,8 +1353,6 @@ Plugin.prototype.destroy = function(d) {
 
     this.lGalleryOn = false;
 
-    clearTimeout(_this.hideBartimeout);
-    this.hideBartimeout = false;
     utils.off(window, '.lg');
     utils.removeClass(document.body, 'lg-on');
     utils.removeClass(document.body, 'lg-from-hash');
@@ -1395,6 +1378,16 @@ Plugin.prototype.destroy = function(d) {
         } catch (err) {}
 
     }, _this.s.backdropDuration + 50);
+};
+
+// Custom
+Plugin.prototype.planName = function() {
+    console.log(this.s.planName);
+    if (this.s.planName !== '') {
+        this.outer.querySelector(this.s.appendPlanNameTo).insertAdjacentHTML(
+            'beforeend',
+            '<div class="lg-plan-name">' + this.s.planName + '</div>');
+    }
 };
 
 window.lightGallery = function(el, options) {
