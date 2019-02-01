@@ -20,7 +20,7 @@
 
     window.CustomEvent = CustomEvent;
 })();
-console.log('hellau');
+
 import utils from './lg-utils';
 window.utils = utils;
 window.lgData = {
