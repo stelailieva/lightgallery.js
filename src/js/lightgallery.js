@@ -1382,7 +1382,6 @@ Plugin.prototype.destroy = function(d) {
 
 // Custom
 Plugin.prototype.planName = function() {
-    console.log(this.s.planName);
     if (this.s.planName !== '') {
         this.outer.querySelector(this.s.appendPlanNameTo).insertAdjacentHTML(
             'beforeend',
