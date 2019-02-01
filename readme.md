@@ -4,7 +4,7 @@
 ![bower](https://img.shields.io/bower/v/lightgallery.js.svg)
 ![npm](https://img.shields.io/npm/v/lightgallery.js.svg)
 
-Full featured JavaScript lightbox gallery. No dependencies.
+Customized Full featured JavaScript lightbox gallery. No dependencies.
 
 ![lightgallery](https://raw.githubusercontent.com/sachinchoolur/lightgallery.js/gh-pages/lightgallery.png)
 
