@@ -776,11 +776,11 @@ Plugin.prototype.slide = function(index, fromTouch, fromThumb) {
 
         if (this.s.download) {
             var _src;
+
             if (_this.s.dynamic) {
                 _src = _this.s.dynamicEl[index].downloadUrl !== false && (_this.s.dynamicEl[index].downloadUrl || _this.s.dynamicEl[index].src);
             } else {
                 _src = _this.items[index].getAttribute('data-download-url') !== 'false' && (_this.items[index].getAttribute('data-download-url') || _this.items[index].getAttribute('href') || _this.items[index].getAttribute('data-src'));
-
             }
 
             if (_src) {
@@ -1385,7 +1385,7 @@ Plugin.prototype.planName = function() {
     if (this.s.planName !== '') {
         this.outer.querySelector(this.s.appendPlanNameTo).insertAdjacentHTML(
             'beforeend',
-            '<div class="lg-plan-name">' + this.s.planName + '</div>');
+            '<div class="lg-plan-name">' + '<strong>' + this.s.planName + '</strong>' + ': ' + 'floor name' +'</div>');
     }
 };
 
